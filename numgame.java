@@ -1,3 +1,4 @@
+import java.awt.FlowLayout;
 import java.awt.event.*;
 import javax.swing.*;
 
@@ -9,35 +10,43 @@ public class numgame extends JFrame {
 
     public numgame() {
         setTitle("Number Guessing Game");
-        setSize(350, 200);
+        setSize(350, 160);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-         setLayout(new FlowLayout());
-    
+        setLayout(new FlowLayout());
+
         randomNumber = (int) (Math.random() * 20) + 1;
 
-        add(new JLabel("Guess a number from 1 to 20"));
+        JLabel label = new JLabel ("Guess a number from 1 to 20");
+        setSize(400,150);
+        add (label);
 
-        guessField = new JTextField(10);
+        JTextField guessField = new JTextField(5);
+        setSize(600, 200);
         add(guessField);
 
         JButton guessButton = new JButton("Guess");
+        setSize (400, 300);
         add(guessButton);
 
-        resultLabel = new JLabel("Enter a number and press Guess.");
+        JLabel resultLabel = new JLabel("Enter a number and press Guess.");
+        setSize(500, 400);
         add(resultLabel);
 
         guessButton.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
                 try {
                     int guess = Integer.parseInt(guessField.getText());
                     
                     if (guess == randomNumber) {
-                        resultLabel.setText("Correct! The number is: " + randomNumber);
+                        resultLabel.setText("Correct! Number is: " + randomNumber);
                     } else if (guess < randomNumber) {
-                        resultLabel.setText("WRONG! The number was: " + randomNumber);
+                        resultLabel.setText("Too low! Number was: " + randomNumber);
                     } else {
-                        resultLabel.setText("WRONG! The number was: " + randomNumber);
+                        resultLabel.setText("Too high! Number was: " + randomNumber);
                     }
+
+                    // Generate a new number for next round
                     randomNumber = (int) (Math.random() * 20) + 1;
 
                 } catch (NumberFormatException ex) {
